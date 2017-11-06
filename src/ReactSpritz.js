@@ -6,15 +6,14 @@ const calcHighlightPoint = wordLength => Math.floor(wordLength / 2);
 const textToWords = text => text.replace(/^\s+|\s+|\n$/, '').split(/\s+/);
 
 class ReactSpritz extends React.Component {
-
   constructor(props) {
     super(props);
 
     const { wpm, text, playing } = props;
 
-    this.state = {            
+    this.state = {
       playing,
-      currentWordIndex: -1,
+      currentWordIndex: -1
     };
 
     this.tempo = 60000 / wpm;
@@ -43,11 +42,13 @@ class ReactSpritz extends React.Component {
     if (nextProps.playing && !this.props.playing) return this.onPlay();
 
     if (!nextProps.playing && this.props.playing) return this.onPause();
+
+    return false;
   }
 
   _displayNextWord = () => {
     const { currentWordIndex } = this.state;
-    const { onDisplayNextWord } = this.props;    
+    const { onDisplayNextWord } = this.props;
     const index = currentWordIndex + 1;
 
     if (onDisplayNextWord) onDisplayNextWord(this.words[index], index);
@@ -86,7 +87,7 @@ class ReactSpritz extends React.Component {
 
     const { currentWordIndex } = this.state;
     const word = currentWordIndex !== -1 && this.words[currentWordIndex];
-    const highlightIndex = word && calcHighlightPoint(word.length);     
+    const highlightIndex = word && calcHighlightPoint(word.length);
 
     return (
       <div className="container">
@@ -117,10 +118,17 @@ ReactSpritz.propTypes = {
   onStart: PropTypes.func,
   onPause: PropTypes.func,
   onStop: PropTypes.func,
-}
+  onDisplayNextWord: PropTypes.func
+};
 
 ReactSpritz.defaultProps = {
   wpm: 250,
-}
+  playing: false,
+  stop: false,
+  onStart: null,
+  onPause: null,
+  onStop: null,
+  onDisplayNextWord: null
+};
 
 export default ReactSpritz;
