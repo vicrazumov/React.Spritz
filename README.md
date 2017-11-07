@@ -17,7 +17,7 @@ npm install react-spritz --save
 ```
 
 * **text** - the text
-* **wpm** - words per minute, how fast will the words be displayed
+* **wpm** - words per minute, how fast the words will be displayed
 * **playing** - you can control the component by changing this property (false, by default)
 
 ### Additional props
