@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ReactSpritz.scss';
 
-const calcHighlightPoint = wordLength => Math.floor(wordLength / 2);
+const calcHighlightPoint = word => Math.floor(word.replace(/[\W]/g, '').length / 2);
 const textToWords = text => text.replace(/^\s+|\s+|\n$/, '').split(/\s+/);
 
 class ReactSpritz extends React.Component {
@@ -108,7 +108,7 @@ class ReactSpritz extends React.Component {
 
     const { currentWordIndex, playing } = this.state;
     const word = currentWordIndex !== -1 && this.words[currentWordIndex];
-    const highlightIndex = word && calcHighlightPoint(word.length);
+    const highlightIndex = word && calcHighlightPoint(word);
 
     return (
       <div className="container">
@@ -130,7 +130,6 @@ class ReactSpritz extends React.Component {
           word && this.props.startTimeout &&
           <div
             className={playing ? 'timeoutBlockHidden' : 'timeoutBlock'}
-            style={{ transition: `transform linear ${this.props.startTimeout}ms` }}
           ></div>
         }
       </div>
