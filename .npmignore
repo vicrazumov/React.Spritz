@@ -1,6 +1,4 @@
-demo/
-dist/
-tests/
-src/
-.*
-
+.babelrc
+.editorconfig
+src
+media

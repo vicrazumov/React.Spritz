@@ -1,7 +1,4 @@
-docs/build/
-dist-es6/
-dist-modules/
-node_modules/
-coverage/
-npm-debug.log
-.eslintcache
+.DS_Store
+build
+node_modules
+*.log

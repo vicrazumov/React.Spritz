@@ -1,0 +1,83 @@
+{
+    "parser": "babel-eslint",
+    "plugins": [
+      "react",
+      "import",
+      "dependencies"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "rules": {
+      "comma-spacing": ["warn"],
+      "dependencies/no-unresolved": [
+        "error",
+        {"ignore": ["leaflet_css", "swiper_css", "roboto_css"]}
+      ],
+      "indent": ["warn", 2, {"SwitchCase": 1}],
+      "key-spacing": ["warn", {
+        "beforeColon": false,
+        "afterColon": true
+      }],
+      "keyword-spacing": ["warn", {"after": true}],
+      "jsx-quotes": ["warn", "prefer-double"],
+      "no-console": "warn",
+      "no-extra-boolean-cast": "off",
+      "no-multi-spaces": "error",
+      "no-spaced-func": "warn",
+      "no-unused-vars": "error",
+      "import/no-unresolved": [
+        "error",
+        {"ignore": ["leaflet_css", "swiper_css", "roboto_css", "ptsans_css"]}
+      ],
+      "no-new-object":"warn",
+      "no-array-constructor":"warn",
+      "no-useless-constructor": "warn",
+      "object-shorthand":"warn",
+      "quote-props": ["warn", "as-needed"],
+      "react/display-name": "warn",
+      "react/prop-types": ["warn", {
+        "ignore": ["children", "history", "location", "params", "routes"]
+      }],
+      "react/no-unused-prop-types": "warn",
+      "react/default-props-match-prop-types": "warn",
+      "react/no-direct-mutation-state": "error",
+      "react/no-danger": "off",
+      "semi": ["warn", "always"],
+      "space-before-blocks": ["warn", "always"],
+      "space-before-function-paren": ["warn", "never"],
+      "spaced-comment": ["warn", "always"],
+      "space-infix-ops": "warn",
+      "space-in-parens": ["warn", "never"],
+      "space-unary-ops": ["warn", {
+        "words": true,
+        "nonwords": false
+      }]
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "jest": true
+    },
+    "globals": {
+      "Promise": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "arrowFunctions": true,
+        "blockBindings": true,
+        "classes": true,
+        "defaultParams": true,
+        "destructuring": true,
+        "jsx": true,
+        "modules": true,
+        "restParams": true,
+        "templateStrings": true,
+        "spread": true
+      },
+      "sourceType": "module"
+    }
+  }
+  

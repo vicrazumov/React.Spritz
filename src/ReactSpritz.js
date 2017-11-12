@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ReactSpritz.css';
+import './ReactSpritz.scss';
 
 const calcHighlightPoint = wordLength => Math.floor(wordLength / 2);
 const textToWords = text => text.replace(/^\s+|\s+|\n$/, '').split(/\s+/);
@@ -9,20 +9,18 @@ class ReactSpritz extends React.Component {
   constructor(props) {
     super(props);
 
-    const { wpm, text, playing } = props;
-
-    this.state = {
-      playing,
-      currentWordIndex: -1
-    };
+    const { wpm, text, startTimeout } = props;
 
     this.tempo = 60000 / wpm;
-    this.timer = playing ? setInterval(this._displayNextWord, this.tempo) : null;
     this.words = textToWords(text);
+
+    this.state = {
+      currentWordIndex: startTimeout ? 0 : -1,
+    }
   }
 
   componentDidMount() {
-
+    if (this.props.playing) this.onPlay();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,24 +44,47 @@ class ReactSpritz extends React.Component {
     return false;
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    clearTimeout(this.startTimeout);
+  }
+
   _displayNextWord = () => {
+    if (this.delay) return (this.delay = false);
+
     const { currentWordIndex } = this.state;
     const { onDisplayNextWord } = this.props;
     const index = currentWordIndex + 1;
+    const word = this.words[index];
 
-    if (onDisplayNextWord) onDisplayNextWord(this.words[index], index);
+    if (onDisplayNextWord) onDisplayNextWord(word, index);
 
     this.setState({ currentWordIndex: index });
 
     if (index === this.words.length - 1) this.onStop();
+
+    this.delay = /^\(|[,\.\)]$/.test(word);
   }
 
-  onPlay = () => {
-    this.setState({ playing: true });
+  _start = () => {
     this.timer = setInterval(this._displayNextWord, this.tempo);
 
     const { onStart } = this.props;
     if (onStart) onStart();
+    this.setState({ playing: true });
+  }
+
+  onPlay = () => {
+    const { startTimeout } = this.props;
+
+    // delay if a word has brackets, commas or periods
+    this.delay = !!startTimeout;
+
+    if (!startTimeout) {
+      return this._start();
+    }
+
+    this.startTimeout = setTimeout(this._start, startTimeout);
   }
 
   onPause = () => {
@@ -85,7 +106,7 @@ class ReactSpritz extends React.Component {
   render() {
     if (!this.props.text) return null;
 
-    const { currentWordIndex } = this.state;
+    const { currentWordIndex, playing } = this.state;
     const word = currentWordIndex !== -1 && this.words[currentWordIndex];
     const highlightIndex = word && calcHighlightPoint(word.length);
 
@@ -105,6 +126,13 @@ class ReactSpritz extends React.Component {
             </div>
           </div>
         }
+        {
+          word && this.props.startTimeout &&
+          <div
+            className={playing ? 'timeoutBlockHidden' : 'timeoutBlock'}
+            style={{ transition: `transform linear ${this.props.startTimeout}ms` }}
+          ></div>
+        }
       </div>
     );
   }
@@ -112,6 +140,7 @@ class ReactSpritz extends React.Component {
 
 ReactSpritz.propTypes = {
   wpm: PropTypes.number,
+  startTimeout: PropTypes.number,
   text: PropTypes.string.isRequired,
   playing: PropTypes.bool,
   stop: PropTypes.bool,
@@ -123,6 +152,7 @@ ReactSpritz.propTypes = {
 
 ReactSpritz.defaultProps = {
   wpm: 250,
+  startTimeout: 1000,
   playing: false,
   stop: false,
   onStart: null,

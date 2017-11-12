@@ -1,0 +1,60 @@
+.container {
+    position: relative;
+    max-width: 30rem;
+    height: 2rem;
+    padding: 1.3em 0;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    font-size: 1.3em;
+    font-family: sans-serif;
+
+  &::before, &::after {
+      content: '';
+      position: absolute;
+      left: 40%;
+      height: 0.8rem;
+      width: 2px;
+      margin-left: -1px;
+      background-color: black;
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+      bottom: 0;
+  }
+
+  .highlight {
+      color: red;
+      display: table-cell;
+  }
+
+  .leftSide {
+      display: table-cell;
+      width: 40%;
+      text-align: right;
+  }
+
+  .rightSide {
+      display: table-cell;
+      width: 60%;
+      text-align: left;
+  }
+
+  .timeoutBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    transform-origin: 40%;
+  }
+
+  .timeoutBlockHidden {
+    @extend .timeoutBlock;
+    transform: scaleX(0);
+  }
+}
