@@ -1,7 +1,7 @@
 # React Spritz🍷
 React implementation of the [Spritz speed-reading technique](http://spritzinc.com/the-science).
 
-![Spritz Sample](https://github.com/vicrazumov/React.Spritz/raw/master/src/media/sample.gif)
+![](https://raw.githubusercontent.com/vicrazumov/React.Spritz/master/media/sample.gif)
 
 Inspired by Luis Ivan's [Spritzer](https://github.com/luisivan/spritzer).
 
