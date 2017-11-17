@@ -2,7 +2,7 @@
   "name": "react-spritz",
   "description": "React implementation of the Spritz speed-reading technique",
   "author": "Viktor Razumov",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "build",
   "scripts": {
     "build": "webpack --env build",

@@ -21,7 +21,8 @@ class ReactSpritz extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.playing) this.onPlay();
+    if (this.props.playing)
+      window.requestAnimationFrame(() => this.onPlay());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,7 +39,7 @@ class ReactSpritz extends React.Component {
 
     if (nextProps.stop && !this.props.stop) return this.onStop();
 
-    if (nextProps.playing && !this.props.playing) return this.onPlay();
+    if (nextProps.playing && !this.props.playing) return window.requestAnimationFrame(() => this.onPlay());
 
     if (!nextProps.playing && this.props.playing) return this.onPause();
 
@@ -72,12 +73,11 @@ class ReactSpritz extends React.Component {
 
     const { onStart } = this.props;
     if (onStart) onStart();
-    this.setState({ playing: true });
   }
 
   onPlay = () => {
     const { startTimeout } = this.props;
-
+    this.setState({ playing: true });
     // delay if a word has brackets, commas or periods
     this.delay = !!startTimeout;
 
@@ -85,7 +85,7 @@ class ReactSpritz extends React.Component {
       return this._start();
     }
 
-    this.startTimeout = setTimeout(this._start, startTimeout);
+    this.startTimeout = setTimeout(this._start, startTimeout - 300);
   }
 
   onPause = () => {
@@ -130,6 +130,7 @@ class ReactSpritz extends React.Component {
         {
           word && this.props.startTimeout &&
           <div
+            style={{transition: `transform linear ${this.props.startTimeout}ms`}}
             className={playing ? 'timeoutBlockHidden' : 'timeoutBlock'}
           ></div>
         }
@@ -152,7 +153,7 @@ ReactSpritz.propTypes = {
 
 ReactSpritz.defaultProps = {
   wpm: 250,
-  startTimeout: 1000,
+  startTimeout: 800,
   playing: false,
   stop: false,
   onStart: null,
