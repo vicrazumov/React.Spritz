@@ -5,6 +5,8 @@ React implementation of the [Spritz speed-reading technique](http://spritzinc.co
 
 Inspired by Luis Ivan's [Spritzer](https://github.com/luisivan/spritzer).
 
+## **[Demo](https://vicrazumov.com)**
+
 ## Installation
 ```
 npm install react-spritz --save
@@ -39,4 +41,5 @@ import '../node_modules/react-spritz/build/main.css';
 ## To-Do
 
 * add controls (stop, play/pause, fwd, rwd, wpm)
-* add custom styles support
+* add tests
+* add progress bar
