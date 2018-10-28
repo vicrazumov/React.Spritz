@@ -32,14 +32,9 @@ import '../node_modules/react-spritz/build/main.css';
 
 ### Additional props
 
+* **normalized** - pass ```true``` if you want longer timeouts for longer words (this will not affect short words)
 * **stop** - pass ```true``` if you want to restart the component
 * **onStart** - pass ```callback``` to do something on start
 * **onPause** - pass ```callback``` to do something on pause (playing=false)
 * **onStop** - pass ```callback``` to do something on stop (stop=true)
 * **onDisplayNextWord** - pass ```callback``` to do something on displaying the next word
-
-## To-Do
-
-* add controls (stop, play/pause, fwd, rwd, wpm)
-* add tests
-* add progress bar

@@ -23,6 +23,7 @@ class App extends Component {
           text={this.text}
           wpm={250}
           playing={true}
+          normalized
         />
       </div>
     );
