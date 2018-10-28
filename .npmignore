@@ -1,4 +1,8 @@
 .babelrc
 .editorconfig
+.eslintrc
+.gitattributes
 src
 media
+example
+webpack.config.js
