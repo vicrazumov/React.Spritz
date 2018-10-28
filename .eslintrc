@@ -1,9 +1,9 @@
 {
     "parser": "babel-eslint",
     "plugins": [
+      "dependencies",
       "react",
-      "import",
-      "dependencies"
+      "import"
     ],
     "extends": [
       "eslint:recommended",
@@ -12,8 +12,7 @@
     "rules": {
       "comma-spacing": ["warn"],
       "dependencies/no-unresolved": [
-        "error",
-        {"ignore": ["leaflet_css", "swiper_css", "roboto_css"]}
+        "error"
       ],
       "indent": ["warn", 2, {"SwitchCase": 1}],
       "key-spacing": ["warn", {
@@ -28,8 +27,7 @@
       "no-spaced-func": "warn",
       "no-unused-vars": "error",
       "import/no-unresolved": [
-        "error",
-        {"ignore": ["leaflet_css", "swiper_css", "roboto_css", "ptsans_css"]}
+        "error"
       ],
       "no-new-object":"warn",
       "no-array-constructor":"warn",
@@ -80,4 +78,3 @@
       "sourceType": "module"
     }
   }
-  
