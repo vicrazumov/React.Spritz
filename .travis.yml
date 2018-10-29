@@ -1,0 +1,13 @@
+language: node_js
+node_js: stable
+install:
+  - yarn --cwd './example/' install
+script:
+  - yarn --cwd './example/' build
+deploy:
+  provider: pages
+  local-dir: ./example/build
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: master
