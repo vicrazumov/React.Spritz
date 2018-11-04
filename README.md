@@ -5,7 +5,7 @@ React implementation of the [Spritz speed-reading technique](http://spritzinc.co
 
 Inspired by Luis Ivan's [Spritzer](https://github.com/luisivan/spritzer).
 
-## **[Demo](https://vicrazumov.com)**
+## **[Demo](https://vicrazumov.github.io/React.Spritz/)**
 
 ## Installation
 ```
