@@ -39,6 +39,7 @@ class ReactSpritz extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.wpm !== this.props.wpm) {
       clearTimeout(this.timer);
+      this.standardTempo = Math.trunc(ONE_MINUTE / this.props.wpm);
       this.charTempo = charTimeout(this.props.text, this.props.wpm);
       this.timer = setTimeout(this._displayNextWord, this._getNextWordTimeout());
     }
